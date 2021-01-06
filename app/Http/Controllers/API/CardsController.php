@@ -37,7 +37,7 @@ class CardsController extends Controller
         if ($request->get('column_id')) {
             $columnId = $request->get('column_id');
             $newWeight = $card->weight;
-            $cards = $this->cardsRepository->findWhere([['weight', '>', $newWeight], 'column_id' => $columnId]);
+            $cards = $this->cardsRepository->findWhere([['weight', '>', $newWeight], 'column_id' => $card->column_id]);
             if (count($cards) > 0) {
                 foreach ($cards as $item) {
                     $this->cardsRepository->update(['weight' => $item->weight - 1], $item->id);

@@ -13,4 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/dump-download', 'App\Http\Controllers\ExportController@download');
 Route::get('/{any}', 'App\Http\Controllers\SPAController@index')->where('any', '^(?!api).*');
+
