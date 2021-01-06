@@ -171,6 +171,10 @@ button {
   height: 100px;
   background-color: #a0aec0;
 }
+.columns-list > li .column-content ul li .view-card {
+  position: absolute;
+  margin-top: 60px;
+}
 
 body {
   padding: 0px;

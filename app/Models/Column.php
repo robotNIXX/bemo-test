@@ -23,6 +23,6 @@ class Column extends Model
      */
     public function cards()
     {
-        return $this->hasMany(Card::class, 'column_id');
+        return $this->hasMany(Card::class, 'column_id')->orderBy('weight', 'ASC');
     }
 }

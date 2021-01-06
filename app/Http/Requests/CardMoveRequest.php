@@ -9,7 +9,7 @@ class CardMoveRequest extends IRFormRequest
     public function rules()
     {
         return [
-            'column_id' => 'required|exists:columns,id'
+            'column_id' => 'exists:columns,id'
         ];
     }
 

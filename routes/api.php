@@ -20,4 +20,5 @@ Route::group(['prefix' => 'columns'], function () {
 });
 Route::group(['prefix' => 'cards'], function () {
     Route::post('/', 'App\Http\Controllers\API\CardsController@store')->name('cards.store');
+    Route::post('/{id}', 'App\Http\Controllers\API\CardsController@update')->name('cards.update');
 });
