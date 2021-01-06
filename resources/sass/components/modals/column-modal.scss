@@ -1,0 +1,9 @@
+.modal-content {
+    &.columns {
+        input {
+            &[type="text"] {
+                @include calc("width", "100% - 10px")
+            }
+        }
+    }
+}

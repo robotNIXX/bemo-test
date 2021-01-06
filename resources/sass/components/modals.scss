@@ -1,0 +1,28 @@
+.vm--modal {
+    height: auto !important;
+}
+.modal-content {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100%;
+    flex-grow: 1;
+    .modal-header {
+        padding: 5px 0px;
+        text-align: center;
+        display: flex;
+        font-size: 1.6rem;
+        font-family: $font-family;
+        font-weight: bold;
+    }
+    .modal-body {
+        display: flex;
+        padding: 5px 0px;
+    }
+
+    .modal-footer {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
