@@ -1,0 +1,28 @@
+.form-content {
+    display: flex;
+    flex-grow: 1;
+    &.form-horisontal {
+        flex-direction: row;
+    }
+    &.form-vertical {
+        flex-direction: column;
+    }
+}
+
+.form-group {
+    display: flex;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.error-input-message {
+    float: left;
+    position: relative;
+    width: 100%;
+    font-size: 0.8rem;
+    color: brown;
+    font-style: italic;
+    padding-top: 2px;
+}
