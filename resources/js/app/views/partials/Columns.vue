@@ -15,10 +15,17 @@
                     <ul v-if="column.cards" class="cards-list">
                         <li v-for="card in column.cards">
                             {{ card.title }}
-                            <i v-if="card.weight > 1" class="fas fa-chevron-circle-up" @click="moveToWeight(card,card.weight - 1)"></i>
-                            <i v-if="index < (columns.length - 1)" class="fas fa-chevron-circle-right"></i>
-                            <i v-if="card.weight < column.cards.length" class="fas fa-chevron-circle-down" @click="moveToWeight(card,card.weight + 1)"></i>
-                            <i v-if="index > 0" class="fas fa-chevron-circle-left"></i>
+                            <i v-if="card.weight > 1" class="fas fa-chevron-circle-up"
+                               @click="moveToWeight(card,card.weight - 1)"></i>
+                            <i v-if="index < (columns.length - 1)" @click="moveToColumn(card,  (index + 1))"
+                               class="fas fa-chevron-circle-right"></i>
+                            <i v-if="card.weight < column.cards.length" class="fas fa-chevron-circle-down"
+                               @click="moveToWeight(card,card.weight + 1)"></i>
+                            <i v-if="index > 0" class="fas fa-chevron-circle-left"
+                               @click="moveToColumn(card,  (index - 1))"></i>
+                            <div class="view-card">
+                                <i class="fas fa-eye" @click="showCardInfo(card)"></i>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -26,21 +33,24 @@
         </ul>
         <modal-column @saveColumn="saveColumn" :errors="errors"></modal-column>
         <modal-card @saveCard="saveCard" :errors="cardErrors"></modal-card>
+        <modal-card-info :card="currentCard"></modal-card-info>
     </div>
 </template>
 
 <script>
 import ModalColumn from "./ModalColumn";
 import ModalCard from "./ModalCard";
+import ModalCardInfo from "./ModalCardInfo";
 
 export default {
     name: "Columns",
-    components: {ModalCard, ModalColumn},
+    components: {ModalCardInfo, ModalCard, ModalColumn},
     data: function () {
         return {
             errors: null,
             cardErrors: null,
-            selectedColumn: null
+            selectedColumn: null,
+            currentCard: null
         }
     },
     mounted() {
@@ -67,10 +77,17 @@ export default {
                 that.errors = error.response.data.errors
             });
         },
-        moveToWeight: function(card, weight) {
-
+        moveToWeight: function (card, weight) {
+            this.$store.dispatch('MOVE_TO_WEIGHT', {card: card, weight: weight});
         },
-        saveCard(card) {
+        moveToColumn: function (card, index) {
+            this.$store.dispatch('MOVE_TO_COLUMN', {card: card, column: this.columns[index]});
+        },
+        showCardInfo: function (card) {
+            this.currentCard = card
+            this.$modal.show('card-info-modal')
+        },
+        saveCard: function (card) {
             let that = this
             card.column_id = this.selectedColumn.id
             this.$store.dispatch('APPEND_THE_CARD', card).then(function (response) {

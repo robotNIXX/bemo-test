@@ -49,6 +49,14 @@ const actions = {
                 reject(error);
             });
         });
+    },
+    MOVE_TO_WEIGHT: async function(context, payload) {
+        let {data} = await Axios.post('/cards/' + payload.card.id, {weight: payload.weight})
+        context.commit('SET_ALL_COLUMNS', data)
+    },
+    MOVE_TO_COLUMN: async function(context, payload) {
+        let {data} = await Axios.post('/cards/' + payload.card.id, {column_id: payload.column.id})
+        context.commit('SET_ALL_COLUMNS', data)
     }
 };
 
