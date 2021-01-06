@@ -1913,6 +1913,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -1947,11 +1951,12 @@ __webpack_require__.r(__webpack_exports__);
     saveColumn: function saveColumn(column) {
       var that = this;
       this.$store.dispatch('CREATE_COLUMN', column).then(function (response) {
-        this.$modal.hide('column-form');
+        that.$modal.hide('column-form');
       }, function (error) {
         that.errors = error.response.data.errors;
       });
     },
+    moveToWeight: function moveToWeight(card, weight) {},
     saveCard: function saveCard(card) {
       var that = this;
       card.column_id = this.selectedColumn.id;
@@ -22049,7 +22054,7 @@ var render = function() {
         ? _c(
             "ul",
             { staticClass: "columns-list" },
-            _vm._l(_vm.columns, function(column) {
+            _vm._l(_vm.columns, function(column, index) {
               return _c("li", [
                 _c("div", { staticClass: "header-column" }, [
                   _vm._v(
@@ -22081,8 +22086,47 @@ var render = function() {
                             _vm._v(
                               "\n                        " +
                                 _vm._s(card.title) +
-                                "\n                    "
-                            )
+                                "\n                        "
+                            ),
+                            card.weight > 1
+                              ? _c("i", {
+                                  staticClass: "fas fa-chevron-circle-up",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.moveToWeight(
+                                        card,
+                                        card.weight - 1
+                                      )
+                                    }
+                                  }
+                                })
+                              : _vm._e(),
+                            _vm._v(" "),
+                            index < _vm.columns.length - 1
+                              ? _c("i", {
+                                  staticClass: "fas fa-chevron-circle-right"
+                                })
+                              : _vm._e(),
+                            _vm._v(" "),
+                            card.weight < column.cards.length
+                              ? _c("i", {
+                                  staticClass: "fas fa-chevron-circle-down",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.moveToWeight(
+                                        card,
+                                        card.weight + 1
+                                      )
+                                    }
+                                  }
+                                })
+                              : _vm._e(),
+                            _vm._v(" "),
+                            index > 0
+                              ? _c("i", {
+                                  staticClass: "fas fa-chevron-circle-left"
+                                })
+                              : _vm._e()
                           ])
                         }),
                         0

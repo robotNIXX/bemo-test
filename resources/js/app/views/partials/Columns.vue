@@ -5,7 +5,7 @@
             <a class="btn btn-primary" @click="showColumnModal">Add Column</a>
         </div>
         <ul v-if="columns" class="columns-list">
-            <li v-for="column in columns">
+            <li v-for="(column, index) in columns">
                 <div class="header-column">
                     {{ column.title }}
 
@@ -15,6 +15,10 @@
                     <ul v-if="column.cards" class="cards-list">
                         <li v-for="card in column.cards">
                             {{ card.title }}
+                            <i v-if="card.weight > 1" class="fas fa-chevron-circle-up" @click="moveToWeight(card,card.weight - 1)"></i>
+                            <i v-if="index < (columns.length - 1)" class="fas fa-chevron-circle-right"></i>
+                            <i v-if="card.weight < column.cards.length" class="fas fa-chevron-circle-down" @click="moveToWeight(card,card.weight + 1)"></i>
+                            <i v-if="index > 0" class="fas fa-chevron-circle-left"></i>
                         </li>
                     </ul>
                 </div>
@@ -58,10 +62,13 @@ export default {
         saveColumn(column) {
             let that = this
             this.$store.dispatch('CREATE_COLUMN', column).then(function (response) {
-                this.$modal.hide('column-form')
+                that.$modal.hide('column-form')
             }, function (error) {
                 that.errors = error.response.data.errors
             });
+        },
+        moveToWeight: function(card, weight) {
+
         },
         saveCard(card) {
             let that = this
