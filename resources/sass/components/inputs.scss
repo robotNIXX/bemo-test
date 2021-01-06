@@ -1,0 +1,12 @@
+input, textarea, button {
+    outline: none;
+}
+
+input {
+    padding: 5px 5px;
+    font-size: $font-size;
+}
+
+button {
+    cursor: pointer;
+}

@@ -1,0 +1,11 @@
+.btn {
+    @include border-radius(5px);
+    padding: 5px 15px;
+    border: 1px solid #eaeaea;
+    color: $buttons-color;
+    cursor: pointer;
+    &.btn-primary {
+        background-color: #eaa748;
+        border-color: #eaa748;
+    }
+}

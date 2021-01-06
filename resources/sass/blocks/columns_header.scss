@@ -1,0 +1,14 @@
+.columns-header {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    align-items: center;
+    h3 {
+        display: flex;
+        padding: 0px 20px 0px 0px;
+    }
+    a {
+        display: flex;
+    }
+
+}
